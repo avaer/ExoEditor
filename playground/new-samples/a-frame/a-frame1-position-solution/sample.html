@@ -1,0 +1,31 @@
+<!--
+Start with Hello, WebVR — Position
+Position defines where objects are in 3D space (X, Y, Z) in meters. Change the position of the objects via the position HTML attribute values. Read about positions. ( https://aframe.io/docs/master/components/position.html )
+
+
+1. Move the cylinder left by decreasing the position's X value
+2. Move the box up by *increasing * the position's Y value
+3. Move the sphere back by decreasing the position's Z value
+4. Extra Credit: Add <a-ring> as a child of <a-sphere> and give it a position to see relative positions
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello, WebVR! - A-Frame</title>
+    <meta name="description" content="Hello, WebVR! - A-Frame">
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+  </head>
+  <body>
+     <a-scene>
+       <a-box position="-1 3 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+       <a-sphere position="0 1.25 -8" radius="1.25" color="#EF2D5E">
+         <a-ring position="-1 1 0" color="#B96FD3"></a-ring>
+         <a-ring position="1 1 0" color="#B96FD3"></a-ring>
+       </a-sphere>
+       <a-cylinder position="-1.5 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+       <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+       <a-sky color="#ECECEC"></a-sky>
+     </a-scene>
+   </body>
+ </html>
