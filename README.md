@@ -1,6 +1,8 @@
-#ExoEditor
-###Work in progress
+# ExoEditor
+### Work in progress
 
-Quick test:
+  
+
+#####Quick test:
 `python -m SimpleHTTPServer`
 
