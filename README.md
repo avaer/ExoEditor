@@ -4,5 +4,9 @@
   
 
 ##### Quick test:
-`python -m SimpleHTTPServer`
+```
+cd ExoEditor
+npm i
+npm run simpleserver
+```
 
