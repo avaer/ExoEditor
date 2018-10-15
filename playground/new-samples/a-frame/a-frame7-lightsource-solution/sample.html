@@ -1,0 +1,48 @@
+<!--
+Compose with Entity-Component — Add a Light Source Sphere
+Use the entity-component pattern to add a sphere that also acts as a point light source. Mix together the geometry, material, and light components to compose this type of object.
+
+1. Look for <a-entity id="lightSphere">
+2. Attach the geometry component configured to use primitive: sphere to the entity
+3. Attach the material component configured to use color: #FFF and shader: flat to the entity
+4. Attach the light component configured to use type: point to the entity
+5. Extra Credit: Add the animation component from the Registry via a <script> tag. Attach the animation configured to use property: position and dir: alternate and loop: true and provide a position value for to: <POSITION>
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ECS - A-Frame School</title>
+    <meta name="description" content="ECS - A-Frame School">
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-animation-component@%5E3.2.x/dist/aframe-animation-component.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+        <img id="groundTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg">
+        <img id="skyTexture" src="https://cdn.aframe.io/a-painter/images/sky.jpg">
+      </a-assets>
+
+     <a-entity id="lightSphere" geometry="primitive: sphere; radius: 0.2" material="shader: flat" light="type: point; color: #FFF" position="-4 3 -4"
+               animation="property: position; to: 4 2.8 -4; dir: alternate; loop: true"></a-entity>
+
+      <a-entity geometry="primitive: box" material="color: red" position="0 0.5 -10"></a-entity>
+      <a-entity geometry="primitive: box" material="color: orange" position="-2 0.5 -8"></a-entity>
+      <a-entity geometry="primitive: box" material="color: yellow" position="2 0.5 -8"></a-entity>
+      <a-entity geometry="primitive: box" material="color: green" position="-4 0.5 -6"></a-entity>
+      <a-entity geometry="primitive: box" material="color: blue" position="4 0.5 -6"></a-entity>
+
+      <a-entity id="sky" geometry="primitive: sphere; thetaLength: 90; radius: 30" material="side: back; height: 2048; width: 2048; src: #skyTexture; shader: flat"></a-entity>
+
+      <a-entity light="type: ambient; color: #222"></a-entity>
+      <a-entity light="type: directional; color: #111" position="-1 1 0"></a-entity>
+
+      <a-entity id="ground" geometry="primitive: plane; height: 100; width: 100"
+                material="src: #groundTexture" rotation="-90 0 0"></a-entity>
+
+      <a-entity id="text" text="value: Show us the light!; color: #BBB"
+                position="2.5 2 -8" scale="8 8 8"></a-entity>
+    </a-scene>
+  </body>
+</html>

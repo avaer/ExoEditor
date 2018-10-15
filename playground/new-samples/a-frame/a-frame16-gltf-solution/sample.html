@@ -1,0 +1,26 @@
+<!--
+Add 3D Models — glTF Model
+3D models are like the images of 3D and VR applications, although a bit heavier. A 3D model is created beforehand in a 3D modeling program such as Blender and consists of vertices, textures, materials. We recommend using glTF, a relatively new 3D file format standard tailored for the Web. glTF is like the JPG of 3D models.
+
+
+1. Add the https://cdn.aframe.io/test-models/models/virtualcity/VC.gltf to the <a-asset-item id="cityModel">'s src attribute to preload the model
+2. Add #cityModel to the <a-gltf-model>'s src attribute to set and add the model
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>glTF Model - A-Frame School</title>
+    <meta name="description" content="glTF Model - A-Frame School">
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+        <a-asset-item id="cityModel" src="https://cdn.aframe.io/test-models/models/virtualcity/VC.gltf"></a-asset-item>
+      </a-assets>
+
+      <a-gltf-model src="#cityModel"></a-gltf-model>
+    </a-scene>
+  </body>
+</html>

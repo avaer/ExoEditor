@@ -1,0 +1,50 @@
+<!--
+
+Use JavaScript
+Use JavaScript and DOM APIs to programmatically modify the scene and its entities. A-Frame is not just HTML; A-Frame provides access to JavaScript, DOM APIs, and three.js underneath for full control. Read about Using JavaScript and DOM APIs with A-Frame.
+
+To see JavaScript logs, we can open the browser's development console by right-clicking the page, clicking Inspect or Inspect Element, and then clicking the Console tab. When viewing solutions, we can see the results through the browser console.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use JavaScript — Getting Entities
+Use document.querySelector() and document.querySelectorAll() to get a reference to the scene and its entities. Read about querying for entities.
+
+
+1. Get a reference to the <a-scene> element using var sceneEl = document.querySelector('a-scene');
+2. Get a reference to all <a-entity> elements using sceneEl.querySelectorAll('a-entity');
+3. Get a reference to the box entity using sceneEl.querySelector('#box');
+4. Get a reference to the sphere and cylinder entities in one .querySelectorAll() call by using multi-element selector . Get a reference to the sphere and cylinder entities in one .querySelectorAll() call by adding and selecting HTML classes
+-->
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JavaScript - A-Frame School</title>
+    <meta name="description" content="JavaScript - A-Frame School">
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+    <script>
+      AFRAME.registerComponent('school-playground', {
+        init: function () {
+          // Solution for Getting Entities.
+          var sceneEl = document.querySelector('a-scene');  // Or this.el since we're in a component.
+          console.log(sceneEl);
+          console.log(sceneEl.querySelectorAll('a-entity'));
+          console.log(sceneEl.querySelector('a-box'));
+          console.log(sceneEl.querySelectorAll('a-sphere, a-cylinder'));
+          console.log(sceneEl.querySelectorAll('.coolshape'));
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <a-scene school-playground>
+      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+      <a-sphere class="coolshape" position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
+      <a-cylinder class="coolshape" position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+      <a-sky color="#ECECEC"></a-sky>
+    </a-scene>
+  </body>
+</html>
