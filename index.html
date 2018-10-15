@@ -144,6 +144,23 @@
 	<script src="node_modules/monaco-editor/min/vs/editor/editor.main.nls.js"></script>
 	<script src="node_modules/monaco-editor/min/vs/editor/editor.main.js"></script>
 
+	<!--
+	ctrl+s keybind reload
+	-->
+	<script>
+	window.addEventListener('keydown', function(event) {
+			if (event.ctrlKey || event.metaKey) {
+					switch (String.fromCharCode(event.which).toLowerCase()) {
+					case 's':
+							event.preventDefault();
+							document.getElementById("runB").click();
+							break;
+					}
+			}
+	});
+
+	</script>
+
 	<script>(function() {
 
 		var PLAY_SAMPLES = [
@@ -338,6 +355,7 @@ function load() {
 
 		var runBtn = document.createElement('span');
 		runBtn.className = 'action run';
+		runBtn.id = 'runB';
 		runBtn.appendChild(document.createTextNode('Run'));
 		runBtn.onclick = function() { run(); };
 		tabArea.appendChild(runBtn);
