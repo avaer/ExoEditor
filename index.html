@@ -442,7 +442,7 @@ function load() {
 				var opt = sampleSwitcher.options[i];
 				if (opt.value === sampleId) {
 					sampleSwitcher.selectedIndex = i;
-					if(sampleSwitcher != null && sampleSwitcher.options[sampleSwitcher.selectedIndex].parentElement.label === "A-frame"){
+					if(sampleSwitcher != null && sampleSwitcher.options[sampleSwitcher.selectedIndex].parentElement.label === "A-frame" || "Introduction"){
 						changeTab(document.getElementById('htmltab'), 'html');
 					}
 					break;
