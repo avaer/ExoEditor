@@ -26,11 +26,9 @@
 
 	<script type="text/javascript">
 		var receivedCall = null;
-		window.load = function (js, html, css) {
+		window.load = function (html) {
 			receivedCall = {
-				js: js,
-				html: html,
-				css: css
+				html: html
 			};
 		};
 	</script>
@@ -60,29 +58,12 @@
 			//TODO: var config = require('vs/editor/common/config/config');
 			//config.getActiveEditor().automaticLayout = true;
 
-			window.load = function (js, html, css) {
-				if (css) {
-					var style = document.createElement("style");
-					style.type = "text/css";
-					style.innerHTML = css;
-					document.body.appendChild(style);
-				}
-				if (html) {
-					document.body.innerHTML += html;
-				}
-				if (js) {
-					try {
-						geval(js);
-					} catch (err) {
-						var pre = document.createElement("pre");
-						pre.appendChild(document.createTextNode(err));
-						document.body.insertBefore(pre, document.body.firstChild);
-					}
-				}
+			window.load = function (html) {
+				document.body.innerHTML += html;
 			};
 
 			if (receivedCall) {
-				window.load(receivedCall.js, receivedCall.html, receivedCall.css);
+				window.load(receivedCall.html);
 			}
 		});
 	</script>

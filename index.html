@@ -34,11 +34,7 @@
 	<link data-name="vs/editor/editor.main" rel="stylesheet" href="node_modules/monaco-editor/min/vs/editor/editor.main.css">
 </head>
 <body class="playground-page">
-	<pre data-preload="playground/new-samples/a-frame/introduction/sample.js" style="display:none">
-</pre>
-	<pre data-preload="playground/new-samples/a-frame/introduction/sample.css" style="display:none">
-</pre>
-	<pre data-preload="playground/new-samples/a-frame/introduction/sample.html" style="display:none">
+<pre data-preload="playground/new-samples/a-frame/introduction/sample.html" style="display:none">
 </pre>
 
 
@@ -119,82 +115,10 @@
 
 		var PLAY_SAMPLES = [
 			{
-				chapter: "Introduction",
-				name: "Introduction",
-				id: "introduction",
-				path: "a-frame/introduction"
-			},
-			{
-				chapter: "A-Frame",
-				name: "1. Hello World",
-				id: "AFrame0",
-				path: "a-frame/a-frame0-hello-world"
-			},
-			{
-				chapter: "A-Frame",
-				name: "2. Position",
-				id: "AFrame1",
-				path: "a-frame/a-frame1-position-solution"
-			},
-			{
-				chapter: "A-Frame",
-				name: "3. Rotation",
-				id: "AFrame2",
-				path: "a-frame/a-frame2-rotation-solution"
-			},
-			{
-				chapter: "A-Frame",
-				name: "4. Primitives",
-				id: "AFrame3",
-				path: "a-frame/a-frame3-primitives-solution"
-			},
-			{
-				chapter: "A-Frame",
-				name: "5. Textures",
-				id: "AFrame4",
-				path: "a-frame/a-frame4-textures-solution"
-			},
-			{
-				chapter: "A-Frame",
-				name: "6. Inspector",
-				id: "AFrame5",
-				path: "a-frame/a-frame5-inspector-solution"
-			},
-			{
-				chapter: "A-Frame",
-				name: "7. Breakdown Primitives",
-				id: "AFrame6",
-				path: "a-frame/a-frame6-break-solution"
-			},
-			{
-				chapter: "A-Frame",
-				name: "8. Light Source",
-				id: "AFrame7",
-				path: "a-frame/a-frame7-lightsource-solution"
-			},
-			{
-				chapter: "A-Frame",
-				name: "9. Registry",
-				id: "AFrame8",
-				path: "a-frame/a-frame8-registry-solution"
-			},
-			{
-				chapter: "A-Frame",
-				name: "9. Gaze-Based Cursor",
-				id: "AFrame9",
-				path: "a-frame/a-frame9-addcursor-solution"
-			},
-			{
-				chapter: "A-Frame",
-				name: "10. Hand Controls",
-				id: "AFrame10",
-				path: "a-frame/a-frame10-handcontrols-solution"
-			},
-			{
-				chapter: "A-Frame",
-				name: "The End",
-				id: "AFrame11",
-				path: "a-frame/a-frame11-end"
+				chapter: "Editor",
+				name: "editor",
+				id: "editor",
+				path: "editor/editor"
 			},
 		];
 
@@ -236,14 +160,6 @@ window.onload = function() {
 
 var editor = null;
 var data = {
-	js: {
-		model: null,
-		state: null
-	},
-	css: {
-		model: null,
-		state: null
-	},
 	html: {
 		model: null,
 		state: null
@@ -327,11 +243,7 @@ function load() {
 		var currentState = editor.saveViewState();
 
 		var currentModel = editor.getModel();
-		if (currentModel === data.js.model) {
-			data.js.state = currentState;
-		} else if (currentModel === data.css.model) {
-			data.css.state = currentState;
-		} else if (currentModel === data.html.model) {
+		if (currentModel === data.html.model) {
 			data.html.state = currentState;
 		}
 
@@ -349,22 +261,8 @@ function load() {
 		var tabArea = document.createElement('div');
 		tabArea.className = 'tabArea';
 
-		var jsTab = document.createElement('span');
-		jsTab.className = 'tab active';
-		jsTab.id = 'jstab';
-		jsTab.appendChild(document.createTextNode('JavaScript'));
-		jsTab.onclick = function() { changeTab(jsTab, 'js'); };
-		tabArea.appendChild(jsTab);
-
-		var cssTab = document.createElement('span');
-		cssTab.className = 'tab';
-		cssTab.id = 'csstab';
-		cssTab.appendChild(document.createTextNode('CSS'));
-		cssTab.onclick = function() { changeTab(cssTab, 'css'); };
-		tabArea.appendChild(cssTab);
-
 		var htmlTab = document.createElement('span');
-		htmlTab.className = 'tab';
+		htmlTab.className = 'tab active';
 		htmlTab.id = 'htmltab';
 		htmlTab.appendChild(document.createTextNode('HTML'));
 		htmlTab.onclick = function() { changeTab(htmlTab, 'html'); };
@@ -439,17 +337,11 @@ function load() {
 
 		samplePath = 'playground/new-samples/' + samplePath;
 
-		var js = xhr(samplePath + '/sample.js').then(function(response) { return response.responseText});
-		var css = xhr(samplePath + '/sample.css').then(function(response) { return response.responseText});
 		var html = xhr(samplePath + '/sample.html').then(function(response) { return response.responseText});
-		monaco.Promise.join([js, css, html]).then(function(_) {
-			var js = _[0];
-			var css = _[1];
-			var html = _[2];
+		monaco.Promise.join([html]).then(function(_) {
+			var html = _[0];
 			LOADED_SAMPLES.push({
 				id: sampleId,
-				js: js,
-				css: css,
 				html: html
 			});
 			return callback(null, findLoadedSample(sampleId));
@@ -472,12 +364,10 @@ function load() {
 	playgroundContainer.appendChild(typingContainer);
 	playgroundContainer.appendChild(runContainer);
 
-	data.js.model = monaco.editor.createModel('console.log("hi")', 'javascript');
-	data.css.model = monaco.editor.createModel('css', 'css');
 	data.html.model = monaco.editor.createModel('html', 'html');
 
 	editor = monaco.editor.create(editorContainer, {
-		model: data.js.model,
+		model: data.html.model,
 		theme: "vs-dark",
 		minimap: {
 			enabled: false
@@ -496,9 +386,7 @@ function load() {
 				var opt = sampleSwitcher.options[i];
 				if (opt.value === sampleId) {
 					sampleSwitcher.selectedIndex = i;
-					if(sampleSwitcher != null && sampleSwitcher.options[sampleSwitcher.selectedIndex].parentElement.label === "A-frame" || "Introduction"){
-						changeTab(document.getElementById('htmltab'), 'html');
-					}
+					changeTab(document.getElementById('htmltab'), 'html');
 					break;
 				}
 			}
@@ -513,9 +401,7 @@ function load() {
 			if (myToken !== currentToken) {
 				return;
 			}
-			data.js.model.setValue(sample.js);
 			data.html.model.setValue(sample.html);
-			data.css.model.setValue(sample.css);
 			editor.setScrollTop(0);
 			run();
 		});
@@ -574,8 +460,6 @@ function doRun(runContainer) {
 	function zipup(){
 		var zip = new JSZip();
 		zip.file("testfile.html", download('html', 'text/html'), {base64: true});
-		zip.file("testfile.css", download('css', 'text/css'), {base64: true});
-		zip.file("testfile.js", download('js', 'application/javascript'), {base64: true});
 		zip.generateAsync({type:"blob"})
 		zip.generateAsync({type:"base64"}).then(function (base64) {
 		    location.href="data:application/zip;base64," + base64;
@@ -587,7 +471,7 @@ function doRun(runContainer) {
 
 
 	runIframe.addEventListener('load', function(e) {
-		runIframe.contentWindow.load(getLang('js'), getLang('html'), getLang('css'));
+		runIframe.contentWindow.load(getLang('html'));
 	});
 }
 
